@@ -1,8 +1,35 @@
-#include <QCoreApplication>
+/*
+ * Author: LOPES Marco
+ * Purpose: Solve a sudoku
+ * Date : november 2016
+ */
+#include "sudokustate.h"
+#include "sudokusolver.h"
+#include <iostream>
+#include <QElapsedTimer>
 
-int main(int argc, char *argv[])
+/*
+ *   Create the sudoku and the call the sudoku solver
+ *
+ *   returns: EXIT_SUCCESS
+ */
+int main()
 {
-    QCoreApplication a(argc, argv);
+    SudokuState sudoku;
+    std::cout << "Enter your sudoku configuration" << std::endl;
+    sudoku.init();
+    sudoku.display();
 
-    return a.exec();
+
+    QElapsedTimer timer;
+    qint64 nanoSec;
+    timer.start();
+    if(SudokuSolver::solve(sudoku)){
+        nanoSec = timer.nsecsElapsed();
+        std::cout << "solved in " << nanoSec/1000 << " microsecond(s)" << std::endl;
+        sudoku.display();
+    }else{
+        std::cout << "unsolvable" << std::endl;
+    }
+    return EXIT_SUCCESS;
 }

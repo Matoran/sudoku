@@ -9,4 +9,10 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    sudokustate.cpp \
+    sudokusolver.cpp
+
+HEADERS += \
+    sudokustate.h \
+    sudokusolver.h
