@@ -5,6 +5,7 @@
  */
 #include "sudokusolver.h"
 #include <QSet>
+#include <iostream>
 
 SudokuSolver::SudokuSolver(){}
 
@@ -20,6 +21,7 @@ bool SudokuSolver::solve(SudokuState &sudoku){
     QSet<int> best;
     int bestLine = 0;
     int bestColumn = 0;
+    int casesBeforeBacktracking = 0;
     //while we have cases with 1 possibility
     do{
         int casesFilled = 0;
@@ -34,6 +36,7 @@ bool SudokuSolver::solve(SudokuState &sudoku){
                         sudoku.setCase(line, column, intersect.toList().first());
                         sudoku.addConstraint(line, column, intersect.toList().first());
                         foundEasyCase = true;
+                        casesBeforeBacktracking++;
                     //deadend
                     }else if(intersect.size() == EMPTY){
                         return false;
@@ -47,13 +50,19 @@ bool SudokuSolver::solve(SudokuState &sudoku){
                     casesFilled++;
                     //sudoku solved
                     if(casesFilled == FULL){
+                        if(!sudoku.getBacktracking()){
+                            std::cout << casesBeforeBacktracking << " placées, sudoku fini" << std::endl;
+                        }
                         return true;
                     }
                 }
             }
         }
     }while(foundEasyCase);
-
+    if(!sudoku.getBacktracking()){
+        std::cout << casesBeforeBacktracking << " placées avant backtracking" << std::endl;
+    }
+    sudoku.setBacktracking(true);
     //if multiple values are possible then try one by one
     foreach (int value, best.toList()) {
         //copy of the current state

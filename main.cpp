@@ -10,8 +10,6 @@
 
 /*
  *   Create the sudoku and the call the sudoku solver
- *
- *   returns: EXIT_SUCCESS
  */
 int main()
 {
@@ -31,5 +29,4 @@ int main()
     }else{
         std::cout << "unsolvable" << std::endl;
     }
-    return EXIT_SUCCESS;
 }

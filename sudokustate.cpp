@@ -133,3 +133,13 @@ int SudokuState::squareNumber(int line, int column) const
 {
     return line/3*3+column/3;
 }
+
+bool SudokuState::getBacktracking() const
+{
+    return backtracking;
+}
+
+void SudokuState::setBacktracking(bool value)
+{
+    backtracking = value;
+}
