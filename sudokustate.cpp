@@ -134,11 +134,24 @@ int SudokuState::squareNumber(int line, int column) const
     return line/3*3+column/3;
 }
 
+
+/*
+ *   Get backtracking value(used or not yet)
+ *
+ *   returns: bool the value of backtracking
+ */
 bool SudokuState::getBacktracking() const
 {
     return backtracking;
 }
 
+/*
+ *   Set the value of backtracking
+ *
+ *   value: the new value for backtracking
+ *
+ *   returns: void
+ */
 void SudokuState::setBacktracking(bool value)
 {
     backtracking = value;
